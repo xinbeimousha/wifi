@@ -1,0 +1,89 @@
+/*主体样式*/
+.container{
+    margin:.6rem .6rem 0 .6rem;
+    padding:1rem .8rem .5rem .8rem;
+    background: #E8F8FE;
+}
+
+.header,.view-code,.phone-number{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.wechat{
+    margin-right:1rem;
+}
+.wechat,.phone{
+    -webkit-box-flex: 1;
+    -webkit-flex:1;
+    flex:1;
+    background: #3B5583;
+    color: #fff;
+    text-align: center;
+
+    padding:.5rem 0;
+}
+
+input[type="text"]{
+    -webkit-box-flex: 1;
+    -webkit-flex:1;
+    flex:1;
+    padding:.5rem 0;
+}
+input[type="checkbox"]{
+    vertical-align: middle;
+}
+button{
+    width:5rem;
+    color:#fff;
+}
+.phone-number{
+    margin-top:.5rem;
+}
+.view-code{
+
+}
+.phone-number button{
+    background: #B61B51;
+}
+.view-code button{
+    background: #3B5583;
+}
+a{
+    text-decoration: underline;
+}
+a.agree{
+    margin:0 .5rem;
+}
+
+.sure{
+    margin-bottom:.5rem;
+}
+
+.gone{
+    margin:.1rem 0;
+    color:transparent;
+}
+.notice{
+    color:rgb(175, 68, 68);
+}
+
+.bg-banner,.wait-banner{
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+}
+.bg-banner{
+    z-index:-1;
+}
+.wait-time{
+    text-align: center;
+    background: lightblue;
+    color:rgb(235, 99, 99);
+}
+.wait-time .time{
+    font-weight: bold;
+    font-size: 1rem;
+}

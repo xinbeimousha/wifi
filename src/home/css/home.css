@@ -1,0 +1,89 @@
+img{
+    display: block;
+}
+.container{
+    background: #E6E4E5;
+}
+.logos{
+    background-image: url(../img/bg.jpg);
+    background-size:cover;
+}
+a{
+    display: inline-block;
+}
+.tools{
+    padding:1rem 1rem 0;
+    color:#fff;
+}
+.tools ul,.friends ul{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.tools ul li,.friends ul li{
+    -webkit-box-flex:1;
+    -webkit-flex:1;
+    flex:1;
+
+    text-align: center;
+}
+.tools img,.friends img{
+    width:2.5rem;
+}
+
+.friends{
+    padding:.5rem 1rem 1rem;
+}
+
+.banner ul{
+  white-space: nowrap;
+  overflow-y: scroll;
+}
+
+.banner ul li{
+    display: inline-block;
+    width:60%;
+}
+
+/*新闻版块*/
+.news{
+    padding:.5rem;
+    background: #fff;
+}
+.news ul{
+    padding:.3rem;
+    border:1px solid green;
+}
+.news ul li{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+
+    padding:.3rem 0;
+    border-bottom: 1px solid #ECECEC
+}
+.news ul li .logo{
+    -webkit-box-flex:1;
+    -webkit-flex:1;
+    flex:1;
+
+    margin-right:.3rem;
+}
+.news ul li .content{
+    -webkit-box-flex:4;
+    -webkit-flex:4;
+    flex:4;
+}
+.news ul li .content .title{
+    padding-bottom: .3rem;
+    border-bottom: 1px solid #ECECEC
+}
+.news ul li .content .detail{
+    padding-top:.3rem;
+    color:#999;
+}
+
+.footer p{
+    text-align: center;
+}
+

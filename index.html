@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>login</title>
+</head>
+
+<body>
+    <div class="bg-banner">
+        <img src="" alt="">
+    </div>
+    <div class="wait-banner" style="display:none">
+        <p class="wait-time">等待<span class="time"></span>秒后进入...</p>
+        <img src="" alt="">
+    </div>
+    <div class="container">
+        
+        <div class="header">
+            <div class="wechat">微信认证</div>
+            <div class="phone">手机认证</div>
+        </div>
+        <div class="phone-number">
+            <input type="text" id="phoneNumber" placeholder="请输入手机号码">
+            <button id="getCode" onclick="getCode()">获取验证码</button>
+        </div>
+        <p class="check-phone gone">请输入有效的手机号码</p>
+        <div class="view-code">
+            <input type="text" id="code" placeholder="请输入验证码">
+            <button id="login">登录</button>
+        </div>
+        <p class="check-code gone">请输入有效的验证码</p>
+        <div class="sure">
+            <input id="agree" onclick="controlLogin()"  type="checkbox">同意
+            <a class="agree" href="#">机场无线使用条款</a>
+            <a href="#">English</a>
+        </div>
+        <div class="telephone">
+            服务热线：<a href="tel:020-666666" style="color:blue">020-666666</a>
+        </div>
+    </div>
+    <script src="js/rem.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+    
+</body>
+
+</html>
