@@ -32,10 +32,9 @@ function getCode() {
 }
 
 function getCodeThing() {
-    console.log(123)
     var phone = $('#phoneNumber').val()
     $.ajax({
-        url: 'http://10.10.60.26/sms/send.do?phoneNum=' + phone,
+        url: 'http://10.10.60.26:8181/api/sms/send.do?phoneNum=' + phone,
         type: 'GET',
         success: function (data) {
             console.log(data)
@@ -56,7 +55,7 @@ function login(path, status, id, time, defaultTime) {
         
 
         $.ajax({
-            url: 'http://10.10.60.26/sms/check.do?code=' + code + '&phoneNum=' + phoneNum,
+            url: 'http://10.10.60.26:8181/api/sms/check.do?code=' + code + '&phoneNum=' + phoneNum,
             type: 'GET',
             xhrFields: {
                 withCredentials: true
@@ -68,7 +67,7 @@ function login(path, status, id, time, defaultTime) {
                         window.location.href = '/src/home/home.html'
                     } else if (status == 1) {
                         $.ajax({
-                            url: 'http://10.10.60.26/api/pageTemplete/' + id + '.do',
+                            url: 'http://10.10.60.26:8181/api/pageTemplete/' + id + '.do',
                             success: function (data) {
                                 var welcomePath = path + data.image;
                                 $('.wait-banner').show()
@@ -114,10 +113,14 @@ $(function () {
     if(agree.checked==false){
         $('#login').attr('disabled', 'disabled')
     }
-    var path = 'http://10.10.60.26/file/downloadImage.do?filePath='
+    var path = 'http://10.10.60.26:8181/file/downloadImage.do?filePath='
     $.ajax({
-        url: 'http://10.10.60.26/wifiRule/rules.do?pageType=11',
+        url: 'http://10.10.60.26:8181/wifiRule/rules.do',
+        data:{
+            pageType:11
+        },
         success: function (data) {
+            console.log(data)
             if (data.pagetTemplete.length > 0) {
                 var result = data.pagetTemplete[0];
                 var loginId = result.loginPageId;
@@ -126,7 +129,7 @@ $(function () {
                 var defaultTime = result.welcomePageWaitTime;
                 var waitTime = result.welcomePageWaitTime * 1000;
                 $.ajax({
-                    url: 'http://10.10.60.26/api/pageTemplete/' + loginId + '.do',
+                    url: 'http://10.10.60.26:8181/api/pageTemplete/' + loginId + '.do',
                     success: function (data) {
                         var loginImg = data.image;
                         var loginImgPath = path + data.image;

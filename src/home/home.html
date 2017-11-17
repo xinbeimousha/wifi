@@ -8,125 +8,66 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/swiper-3.4.2.min.css">
     <title>home</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="logos">
-            <div class="tools">
-                <ul>
-                    <li>
-                        <a href="#">
-                            <img src="img/2.png" alt="">
-                            <p>航班动态</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="img/3.png" alt="">
-                            <p>在线值机</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="img/4.png" alt="">
-                            <p>乘机指南</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="img/5.png" alt="">
-                            <p>地图导航</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="friends">
-                <ul>
-                    <li>
-                        <a href="#">
-                            <img src="img/6.png" alt="">
-                            <p>世纪</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="img/7.png" alt="">
-                            <p>58同城</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="img/8.png" alt="">
-                            <p>房产</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <!-- <img src="img/5.png" alt="">
-                                    <p></p> -->
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="banner">
-            <ul>
-                <li>
-                    <img src="img/1.jpg" alt="">
-                </li>
-                <li>
-                    <img src="img/2.jpg" alt="">
-                </li>
-                <li>
-                    <img src="img/3.jpg" alt="">
+    <div id="app">
+        <div v-for="(item,index1) in asyncHtml" :class="{tools:item.tools,friends:item.friends,
+            banner:item.banner,bannerChild:item.bannerChild,
+            news:item.news}">
+            <ul v-if="item.tools">
+                <li v-for="(data,index2) in item.tools">
+                    <a :href="data.link">
+                        <img :src="data.img" alt="">
+                        <p style="color:#000">{{data.name}}</p>
+                    </a>
                 </li>
             </ul>
-        </div>
-        <div class="banner-child">
-            <a href="#">
-                <img src="img/3.jpg" alt="">
-            </a>
-        </div>
-        <div class="news">
-            <ul>
-                <li>
+            <ul v-if="item.banner">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <li v-for="(data,index2) in item.banner" class="swiper-slide">
+                            <a :href="data.link">
+                                <img :src="data.img" alt="">
+                            </a>
+                        </li>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </ul>
+            <div v-if="item.bannerChild" v-for="(data,index2) in item.bannerChild">
+                <a :href="data.link">
+                    <img :src="data.img" alt="">
+                </a>
+            </div>
+            <ul v-if="item.news">
+                <li v-for="(data,index2) in item.news" @click="LinkTo(data.link)">
                     <div class="logo">
-                        <img src="img/2.png" alt="">
+                        <img :src="data.img" alt="">
                     </div>
                     <div class="content">
-                        <p class="title">夏天 那些阳光灿烂的日子</p>
-                        <p class="detail">经历过夏天后,对生活的热爱</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="logo">
-                        <img src="img/3.png" alt="">
-                    </div>
-                    <div class="content">
-                        <p class="title">夏天 那些阳光灿烂的日子</p>
-                        <p class="detail">经历过夏天后,对生活的热爱</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="logo">
-                        <img src="img/4.png" alt="">
-                    </div>
-                    <div class="content">
-                        <p class="title">夏天 那些阳光灿烂的日子</p>
-                        <p class="detail">经历过夏天后,对生活的热爱</p>
+                        <p class="title">{{data.title}}</p>
+                        <p class="detail">{{data.content}}</p>
                     </div>
                 </li>
             </ul>
         </div>
         <div class="footer">
             <p>白云信息科技提供服务和技术支持</p>
-            <p>服务支持热线: <a href="tel:020-666666">123456</a></p>
+            <p>服务支持热线:
+                <a href="tel:020-666666">123456</a>
+            </p>
             <p>京ICP备12002594号 - 7</p>
         </div>
     </div>
+
     <script src="../../js/rem.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/swiper-3.4.2.min.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
