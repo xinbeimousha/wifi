@@ -71,7 +71,7 @@ function login(path, status, id, time, defaultTime) {
                             success: function (data) {
                                 var welcomePath = path + data.image;
                                 $('.wait-banner').show()
-                                $('.wait-banner img').attr('src', welcomePath)
+                                $('.wait-banner').css('background-image','url('+welcomePath+')')
                                 $('.wait-time .time').html(defaultTime);
                                 var timer = setInterval(function () {
                                     defaultTime--;
@@ -133,7 +133,7 @@ $(function () {
                     success: function (data) {
                         var loginImg = data.image;
                         var loginImgPath = path + data.image;
-                        $('.bg-banner img').attr('src', loginImgPath)
+                        $('.bg-banner').css('background-image','url('+loginImgPath+')')
                         $('#login').click(function () {
                             login(path, welcomeStatus, welcomeId, waitTime, defaultTime)
                         })

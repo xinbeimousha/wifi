@@ -1,6 +1,6 @@
 /*主体样式*/
 .container{
-    margin:.6rem .6rem 0 .6rem;
+    margin:0 .6rem 0 .6rem;
     padding:1rem .8rem .5rem .8rem;
     background: #E8F8FE;
 }
@@ -74,6 +74,7 @@ a.agree{
     right:0;
     top:0;
     bottom:0;
+    background-size:cover;
 }
 .bg-banner{
     z-index:-1;
