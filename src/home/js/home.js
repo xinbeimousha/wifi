@@ -13,13 +13,15 @@ var app = new Vue({
         $.ajax({
             url:'http://10.10.60.26:8181/wifiRule/rules.do?pageType=14',
             type:"GET",
-            success:function(data){              
-                var id = data.pagetTemplete[0].homePageId
+            success:function(data){ 
+                console.log(data)             
+                var id = data.homePageId
                 $.ajax({
-                    url: 'http://10.10.60.26:8181/api/pageTemplete/'+id+'.do',
+                    url: 'http://10.10.60.26:8181/pageTemplete/get.do?id='+id,
                     type: "GET",
                     success: function (data) {
-                        _this.asyncHtml = JSON.parse(data.html)
+                        console.log(data)
+                        _this.asyncHtml = JSON.parse(data.html).components
                     }
                 })
             }

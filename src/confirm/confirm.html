@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../css/common.css">
+    <title>Document</title>
+    <style>
+        .confirmPage {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-size: cover;
+        }
+
+        .confirmInter {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, .7);
+            position: absolute;
+            left: 50%;
+            top: 20%;
+            -ms-transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+            border: 3px solid #fff;
+            z-index: 1000;
+        }
+
+        .confirmInter .content {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+        .confirmInter .content p {
+            text-align: center;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="confirmInter" onclick="homePage()">
+        <div class="content">
+            <p>确认上网</p>
+            <p>Confirm</p>
+        </div>
+    </div>
+    <div class="confirmPage"></div>
+    <script src="../../js/rem.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script>
+        //跳转到home页面
+        function homePage(){
+            window.location.href= '/src/home/home.html'
+        }
+        //页面初始化
+        $($.ajax({
+            url: 'http://10.10.60.26:8181/wifiRule/rules.do',
+            data: {
+                pageType: 15
+            },
+            success: function (data) {
+                //请求页面模板数据
+                $.ajax({
+                    url:'http://10.10.60.26:8181/pageTemplete/get.do?id='+data.confirmPageId,
+                    success:function(data){
+                        var confirmHtml = JSON.parse(data.html);
+                        //判断是单图片还是自定义HTML
+                        //如果是单图片
+                        if(confirmHtml.singleImg.success==true){
+                            $('.confirmPage').css('background-image','url('+confirmHtml.singleImg.path+')')
+                        }else{
+                            $('.confirmPage').html(confirmHtml.reditHtml.html)
+                        }
+                    }
+
+                })
+            }
+        }))
+    </script>
+</body>
+
+</html>
