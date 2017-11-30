@@ -5,6 +5,15 @@ $('#phoneNumber').focus(function () {
 $('#code').focus(function () {
     $('.check-code').removeClass('notice')
 })
+//关闭开屏页
+function closeWelcome(){
+    $('.welcome-page').hide();
+    $('.closeWelcome').hide();
+}
+//跳转到确认页面
+function routeToConfirm(){
+    window.location.href ='/src/confirm/confirm.html'
+}
 //获取验证码
 function getCode() {
     var phone = $('#phoneNumber').val()
@@ -45,15 +54,13 @@ function getCodeThing() {
     })
 }
 //登录
-function login(path, status, id, time, defaultTime) {
+function login(status, id, time, defaultTime) {
     var code = $('#code').val();
     var phoneNum = $('#phoneNumber').val();
     var reg = /^\d{4}$/;
     if (!reg.test(code)) {
         $('.check-code').addClass('notice')
     } else {
-        
-
         $.ajax({
             url: 'http://10.10.60.26:8181/api/sms/check.do?code=' + code + '&phoneNum=' + phoneNum,
             type: 'GET',
@@ -64,21 +71,27 @@ function login(path, status, id, time, defaultTime) {
             success: function (data) {
                 if(data.success==true){
                     if (status == 0) {
-                        window.location.href = '/src/home/home.html'
+                        window.location.href = '/src/confirm/confirm.html'
                     } else if (status == 1) {
                         $.ajax({
-                            url: 'http://10.10.60.26:8181/api/pageTemplete/' + id + '.do',
+                            url: 'http://10.10.60.26:8181/api/pageTemplete/get.do?id='+id,
                             success: function (data) {
-                                var welcomePath = path + data.image;
-                                $('.wait-banner').show()
-                                $('.wait-banner').css('background-image','url('+welcomePath+')')
+                                var waitHtml = JSON.parse(data.html)
+                                //判断是单图片数据还是自定义html
+                                if(waitHtml.singleImg.success==true){
+                                    $('.wait-banner').css('background-image','url('+waitHtml.singleImg.path+')')
+                                }else{
+                                    $('.wait-banner').html(waitHtml.reditHtml.html)
+                                }
                                 $('.wait-time .time').html(defaultTime);
+                                $('.wait-banner').show();
+                                $('.waitForInter').show();
                                 var timer = setInterval(function () {
                                     defaultTime--;
                                     $('.wait-time .time').html(defaultTime);
                                     if (defaultTime == 0) {
                                         clearInterval(timer);
-                                        window.location.href = '/src/home/home.html'
+                                        window.location.href = '/src/confirm/confirm.html'
                                     }
                                 }, 1000)
                             }
@@ -113,34 +126,60 @@ $(function () {
     if(agree.checked==false){
         $('#login').attr('disabled', 'disabled')
     }
-    var path = 'http://10.10.60.26:8181/file/downloadImage.do?filePath='
+    // var path = 'http://10.10.60.26:8181/file/downloadImage.do?filePath='
+    //初始化请求
     $.ajax({
         url: 'http://10.10.60.26:8181/wifiRule/rules.do',
         data:{
             pageType:11
         },
         success: function (data) {
-            console.log(data)
-            if (data.pagetTemplete.length > 0) {
-                var result = data.pagetTemplete[0];
+                var result = data
+                console.log(result)
+                if(result.welcomeStatus==1){
+                    //判断是否开启开屏页，如果开启则请求开屏页数据
+                    $.ajax({
+                        url:'http://10.10.60.26:8181/pageTemplete/get.do?id='+result.welcomePageId,
+                        success:function(data){
+                            var welcomeHtml = JSON.parse(data.html)
+                            console.log(welcomeHtml)
+                            //判断开屏页是单图片还是自定义HTML
+                            //如果是单图片
+                            if(welcomeHtml.singleImg.success==true){
+                                $('.welcome-page').css('background-image','url('+welcomeHtml.singleImg.path+')')
+                            }else{
+                                //如果是自定义html
+                                $('.welcome-page').html(welcomeHtml.reditHtml.html)
+                            }
+                            $('.welcome-page').show();
+                            $('.closeWelcome').show();
+                        }
+                    })
+                }
                 var loginId = result.loginPageId;
-                var welcomeId = result.welcomePageId;
-                var welcomeStatus = result.welcomeStatus;
-                var defaultTime = result.welcomePageWaitTime;
-                var waitTime = result.welcomePageWaitTime * 1000;
+                var waitId = result.waitPageId;
+                var waitStatus = result.waitStatus;
+                var defaultTime = result.waitPageWaitTime;
+                var waitTime = result.waitPageWaitTime * 1000;
+                //请求登录页面模板
                 $.ajax({
-                    url: 'http://10.10.60.26:8181/api/pageTemplete/' + loginId + '.do',
+                    url: 'http://10.10.60.26:8181/pageTemplete/get.do?id='+loginId,
                     success: function (data) {
-                        var loginImg = data.image;
-                        var loginImgPath = path + data.image;
-                        $('.bg-banner').css('background-image','url('+loginImgPath+')')
+                        var loginHtml = JSON.parse(data.html)
+                        console.log(loginHtml)
+                        //判断开屏页是单图片还是自定义HTML
+                            //如果是单图片
+                            if(loginHtml.singleImg.success==true){
+                                $('.bg-banner').css('background-image','url('+loginHtml.singleImg.path+')')
+                            }else{
+                                //如果是自定义
+                                $('.bg-banner').html(loginHtml.reditHtml.html)
+                            }
                         $('#login').click(function () {
-                            login(path, welcomeStatus, welcomeId, waitTime, defaultTime)
+                            login(waitStatus,waitId,waitTime,defaultTime)
                         })
                     }
                 })
             }
-
-        }
     })
 })

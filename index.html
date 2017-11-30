@@ -12,15 +12,25 @@
 </head>
 
 <body>
-    <div class="bg-banner">
-        <img src="" alt="">
+    <div class="closeWelcome" onclick="closeWelcome()" style="display:none">
+        <div class="content">
+            <p>关闭</p>
+            <p>Close</p>
+        </div>
     </div>
-    <div class="wait-banner" style="display:none">
-        <p class="wait-time">等待<span class="time"></span>秒后进入...</p>
-        <img src="" alt="">
+    <div class="waitForInter" onclick="routeToConfirm()" style="display:none">
+        <div class="content">
+            <p>跳过</p>
+            <p>Skip</p>
+            <p>9</p>
+        </div>
+    </div>
+    <div class="welcome-page" style="display:none"></div>
+    <div class="bg-banner"> 
+    </div>
+    <div class="wait-banner" style="display:none"> 
     </div>
     <div class="container">
-        
         <div class="header">
             <div class="wechat">微信认证</div>
             <div class="phone">手机认证</div>

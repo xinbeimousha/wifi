@@ -68,7 +68,7 @@ a.agree{
     color:rgb(175, 68, 68);
 }
 
-.bg-banner,.wait-banner{
+.bg-banner,.wait-banner,.welcome-page{
     position: absolute;
     left:0;
     right:0;
@@ -87,4 +87,31 @@ a.agree{
 .wait-time .time{
     font-weight: bold;
     font-size: 1rem;
+}
+
+.closeWelcome,.waitForInter,.confirmInter{
+    width:4rem;
+    height:4rem;
+    border-radius: 50%;
+    background: rgba(0,0,0,.7);
+    position: absolute;
+    left:50%;
+    top:20%;
+    -ms-transform:translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    border:3px solid #fff;
+    z-index: 1000;
+}
+.closeWelcome .content,.waitForInter .content,.confirmInter .content{
+    position: absolute;
+    width:100%;
+    top:50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.closeWelcome .content p,.waitForInter .content p,.confirmInter .content p{
+    text-align: center;
+    color: #fff;
 }
